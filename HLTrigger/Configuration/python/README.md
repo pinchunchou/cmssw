@@ -52,6 +52,7 @@ cmsRun step2_L1REPACK_HLT.py >& log &
 
 ### References
 
-s12 from https://indico.cern.ch/event/1237252/contributions/5204534 
-(XC coordination: https://indico.cern.ch/event/1251668)
+slide 12 from Salavat's talk https://indico.cern.ch/event/1237252/contributions/5204534 
+
+(PPD coordination meeting: https://indico.cern.ch/event/1251668)
 
