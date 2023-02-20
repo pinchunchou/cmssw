@@ -4,7 +4,7 @@
 cmsrel CMSSW_13_0_0_pre4
 cd CMSSW_13_0_0_pre4/src
 cmsenv
-git cms-merge-topic  silviodonato:customizeHLTfor2023
+git cms-merge-topic  silviodonato:customizeHLTFor2023
 scram b -j4
 hltGetConfiguration (....) > hlt.py 
 ```
