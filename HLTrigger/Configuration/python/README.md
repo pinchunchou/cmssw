@@ -12,18 +12,18 @@ hltGetConfiguration (....) > hlt.py
 then you can call the customization function(s) by adding at the bottom of your `hlt.py`, as usual. Example:
 
 ```
-from HLTrigger.Configuration.customizeHLTFor2023 import customizeHCALFor2023
-process = customizeHCALFor2023(process)
+from HLTrigger.Configuration.customizeHLTFor2023 import customizeHLTFor2023
+process = customizeHLTFor2023(process)
 ```
 
 or you can use directly
 ```
-hltGetConfiguration (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHCALFor2023
+hltGetConfiguration (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023
 ```
 
 or you can use it in cmsDriver:
 ```
-cmsDriver.py step2 (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHCALFor2023
+cmsDriver.py step2 (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023
 ```
 
 Examples:
@@ -34,7 +34,7 @@ hltGetConfiguration /dev/CMSSW_13_0_0/GRun \
    --unprescale \
    --output minimal \
    --max-events 100 \
-   --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHCALFor2023 \
+   --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023 \
    --eras Run3 \
    --input /store/data/Run2022G/EphemeralHLTPhysics3/RAW/v1/000/362/720/00000/850a6b3c-6eef-424c-9dad-da1e678188f3.root \
    > hltData.py
@@ -50,9 +50,14 @@ cmsDriver.py step2  --process reHLT -s L1REPACK:Full,HLT:@relval2022 --condition
 cmsRun step2_L1REPACK_HLT.py >& log &
 ```
 
+### Note
+
+You can use separately the two functions `customizeHLTFor2023.customizePFHadronCalibrationFor2023` and `customizeHLTFor2023.customizeHCALFor2023`.
+
 ### References
 
 slide 12 from Salavat's talk https://indico.cern.ch/event/1237252/contributions/5204534 
 
 (PPD coordination meeting: https://indico.cern.ch/event/1251668)
 
+Changgi's slides at JetMET trigger ( https://indico.cern.ch/event/1258851/ )
