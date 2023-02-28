@@ -54,13 +54,13 @@ def customizeHCAL(process, HCAL_PFclusters, HCAL_PFrechits):
 def customizePFHadronCalibrationFor2023(process):
     if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
         process.GlobalTag.toGet.append(
-         cms.PSet(
-             record = cms.string("PFCalibrationRcd"),
-             tag = cms.string("PFCalibration_CMSSW_13_0_0_pre4_HLT_126X_mcRun3_2023"),
-             connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/PF/PFCalibration.db"),
-             snapshotTime = cms.string('9999-12-31 23:59:59.000'),
-         )
-    )
+                 cms.PSet(
+                     record = cms.string("PFCalibrationRcd"),
+                     label = cms.untracked.string('HLT'),
+                     connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/PF/PFCalibration.db"),
+                     connect = cms.string("sqlite_file:PFCalibration.db"),
+                 )
+        )
     else:
             print("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
     return process
