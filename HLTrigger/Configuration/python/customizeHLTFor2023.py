@@ -58,6 +58,8 @@ def customizePFHadronCalibrationFor2023(process):
                 record = cms.string("PFCalibrationRcd"),
                 label = cms.untracked.string('HLT'),
                 connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/PF/PFCalibration.db"),
+                tag = cms.string('PFCalibration_CMSSW_13_0_0_pre4_HLT_126X_mcRun3_2023'),
+                snapshotTime = cms.string('9999-12-31 23:59:59.000'),
             )
         )
     else:
