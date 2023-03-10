@@ -70,3 +70,38 @@ def customizeHLTFor2023(process):
     process = customizePFHadronCalibrationFor2023(process)
     process = customizeHCALFor2023(process)
     return process
+
+def customiseHLTfor2022L1TMenu(process):
+
+    dictL1TSeeds2022 = {
+
+      # BPH (Tau3Mu)
+      'hltL1sTripleMuControl': 'L1_TripleMu_5SQ_3SQ_0OQ',
+      'hltL1sDoubleMu0er2p0SQOSdEtaMax1p6orTripleMu21p50': 'L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p6 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p5 OR L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4 OR L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9 OR L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9 OR L1_TripleMu_2SQ_1p5SQ_0OQ_Mass_Max12 OR L1_DoubleMu4_SQ_OS_dR_Max1p2 OR L1_DoubleMu4p5_SQ_OS_dR_Max1p2',
+
+      # BTV
+      'hltL1sDiJet16er2p5Mu3dRMax0p4': 'L1_Mu3_Jet16er2p5_dR_Max0p4',
+      'hltL1sDiJet35er2p5Mu3dRMax0p4': 'L1_Mu3_Jet35er2p5_dR_Max0p4',
+      'hltL1sDiJet60er2p5Mu3dRMax0p4': 'L1_Mu3_Jet60er2p5_dR_Max0p4',
+      'hltL1sDiJet80er2p5Mu3dRMax0p4': 'L1_Mu3_Jet80er2p5_dR_Max0p4',
+      'hltL1sDiJet120er2p5Mu3dRMax0p8': 'L1_Mu3_Jet120er2p5_dR_Max0p8',
+
+      # JME
+      'hltL1sSingleJet35Fwd': 'L1_SingleJet35_FWD3p0',
+      'hltL1sSingleJet35OrZeroBias': 'L1_SingleJet35 OR L1_SingleJet35_FWD3p0 OR L1_ZeroBias',
+      'hltL1sSingleJet60Fwd': 'L1_SingleJet60_FWD3p0',
+      'hltL1sSingleJet60Or60Fwd': 'L1_SingleJet60 OR L1_SingleJet60_FWD3p0',
+      'hltL1sSingleJet90Fwd': 'L1_SingleJet90_FWD3p0',
+      'hltL1sV0SingleJet60Or60Fwd': 'L1_SingleJet60 OR L1_SingleJet60_FWD3p0 OR L1_SingleJet90 OR L1_SingleJet90_FWD3p0',
+      'hltL1sSingleJet120Fwd': 'L1_SingleJet120_FWD3p0',
+      'hltL1sSingleJet120Or120Fwd': 'L1_SingleJet120 OR L1_SingleJet120_FWD3p0',
+
+      # HIG (VBF HTauTau)
+      'hltL1VBFDiJetIsoTau': 'L1_DoubleJet35_Mass_Min450_IsoTau45er2p1_RmOvlp_dR0p5',
+    }
+
+    for modName,oldSeed in dictL1TSeeds2022.items():
+        try: getattr(process, modName).L1SeedsLogicalExpression = oldSeed
+        except: pass
+
+    return process
