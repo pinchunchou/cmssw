@@ -50,6 +50,13 @@ cmsDriver.py step2  --process reHLT -s L1REPACK:Full,HLT:@relval2022 --condition
 cmsRun step2_L1REPACK_HLT.py >& log &
 ```
 
+### Customization function to run the latest HLT menu on 2022 data collected with L1Menu_Collisions2022_v1_5_0
+
+If you want to run on 2022 data using the old L1Menu_Collisions2022_v1_5_0, you can get the latest HLT GRun menu compatible using 
+```
+--customise HLTrigger/Configuration/customizeHLTFor2023.customiseHLTfor2022L1TMenu
+```
+
 ### Note
 
 You can use separately the two functions `customizeHLTFor2023.customizePFHadronCalibrationFor2023` and `customizeHLTFor2023.customizeHCALFor2023`.
