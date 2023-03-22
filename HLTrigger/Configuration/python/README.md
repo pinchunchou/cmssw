@@ -1,5 +1,10 @@
 ### HLT customization functions for 2023 Run-3 studies
 
+customizeHLTFor2023WithJEC will include:
+- new 2023 HCAL PF rechits thresholds
+- new 2023 PF hadron calibration
+- new 2023 Jet Energy Correction, only for AK4CaloHLT, AK4PFHLT, AK8PFHLT (AK8CaloHLT is not ready yet!)
+
 ```
 cmsrel CMSSW_13_0_0
 cd CMSSW_13_0_0/src
