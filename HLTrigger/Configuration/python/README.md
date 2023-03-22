@@ -4,7 +4,7 @@
 cmsrel CMSSW_13_0_0
 cd CMSSW_13_0_0/src
 cmsenv
-git cms-merge-topic silviodonato:customizeHLTFor2023
+git cms-merge-topic silviodonato:customizeHLTFor2023WithJEC
 scram b -j4
 hltGetConfiguration (....) > hlt.py 
 ```
@@ -12,18 +12,18 @@ hltGetConfiguration (....) > hlt.py
 then you can call the customization function(s) by adding at the bottom of your `hlt.py`, as usual. Example:
 
 ```
-from HLTrigger.Configuration.customizeHLTFor2023 import customizeHLTFor2023
+from HLTrigger.Configuration.customizeHLTFor2023 import customizeHLTFor2023WithJEC
 process = customizeHLTFor2023(process)
 ```
 
 or you can use directly
 ```
-hltGetConfiguration (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023
+hltGetConfiguration (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023WithJEC
 ```
 
 or you can use it in cmsDriver:
 ```
-cmsDriver.py step2 (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023
+cmsDriver.py step2 (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023WithJEC
 ```
 
 Example 1:
@@ -34,7 +34,7 @@ hltGetConfiguration /dev/CMSSW_13_0_0/GRun/V24 \
    --unprescale \
    --output minimal \
    --max-events 100 \
-   --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023 \
+   --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023WithJEC \
    --eras Run3 \
    --input /store/data/Run2022G/EphemeralHLTPhysics3/RAW/v1/000/362/720/00000/850a6b3c-6eef-424c-9dad-da1e678188f3.root \
    > hltData.py
