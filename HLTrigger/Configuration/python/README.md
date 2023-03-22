@@ -9,7 +9,7 @@ customizeHLTFor2023WithJEC will include:
 cmsrel CMSSW_13_0_0
 cd CMSSW_13_0_0/src
 cmsenv
-git cms-merge-topic silviodonato:customizeHLTFor2023WithJEC
+git cms-merge-topic silviodonato:customizeHLTFor2023
 scram b -j4
 hltGetConfiguration (....) > hlt.py 
 ```
