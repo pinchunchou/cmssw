@@ -79,7 +79,7 @@ HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2022L1TMenu \
 
 ### Note
 
-You can use separately the two functions `customizeHLTFor2023.customizePFHadronCalibrationFor2023` and `customizeHLTFor2023.customizeHCALFor2023`.
+You can use separately the functions `customizeHLTFor2023.customizePFHadronCalibrationFor2023` and `customizeHLTFor2023.customizeHCALFor2023`, and `customizeHLTFor2023.customizeJECFor2023_noAK8CaloHLT`.
 
 ### References
 
