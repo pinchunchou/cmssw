@@ -97,6 +97,7 @@ def customizeJECFor2023_noAK8CaloHLT(process):
         )
     else:
             raise Exception("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
+    raise Exception("You are trying to use the old customization function (customizeJECFor2023_noAK8CaloHLT or customizeHLTFor2023WithJEC). Please move the the new customization function customizeHLTFor2023WithJEC_v2 or customizeJECFor2023_v2.")
     return process
 
 def customizeJECFor2023_v2(process):
