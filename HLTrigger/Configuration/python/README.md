@@ -3,7 +3,12 @@
 customizeHLTFor2023WithJEC_v2 will include:
 - new 2023 HCAL PF rechits thresholds
 - new 2023 PF hadron calibration
-- new 2023 Jet Energy Correction, only for AK4CaloHLT, AK4PFHLT, AK8PFHLT (AK8CaloHLT is not ready yet!)
+- new 2023 Jet Energy Correction for all kind of jets: AK4CaloHLT, AK4PFHLT, AK8PFHLT, AK8CaloHLT
+
+The difference with respect to customizeJECFor2023_noAK8CaloHLT is:
+- new 2023 Jet Energy Correction includes AK8CaloHLT
+- new 2023 Jet Energy Correction for AK4CaloHLT has been slightly updated
+
 
 ```
 cmsrel CMSSW_13_0_0
@@ -84,7 +89,7 @@ HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2022L1TMenu \
 
 ### Note
 
-You can use separately the functions `customizeHLTFor2023.customizePFHadronCalibrationFor2023` and `customizeHLTFor2023.customizeHCALFor2023`, `customizeHLTFor2023.customizeJECFor2023_noAK8CaloHLT`, and `customizeHLTFor2023.customizeJECFor2023_noAK8CaloHLT`.
+You can use separately the functions `customizeHLTFor2023.customizePFHadronCalibrationFor2023` and `customizeHLTFor2023.customizeHCALFor2023`, `customizeHLTFor2023.customizeJECFor2023_noAK8CaloHLT`, and `customizeHLTFor2023.customizeJECFor2023_v2`.
 
 ### References
 
