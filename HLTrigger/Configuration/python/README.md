@@ -1,6 +1,6 @@
 ### HLT customization functions for 2023 Run-3 studies
 
-customizeHLTFor2023WithJEC will include:
+customizeHLTFor2023WithJEC_v2 will include:
 - new 2023 HCAL PF rechits thresholds
 - new 2023 PF hadron calibration
 - new 2023 Jet Energy Correction, only for AK4CaloHLT, AK4PFHLT, AK8PFHLT (AK8CaloHLT is not ready yet!)
@@ -17,18 +17,18 @@ hltGetConfiguration (....) > hlt.py
 then you can call the customization function(s) by adding at the bottom of your `hlt.py`, as usual. Example:
 
 ```
-from HLTrigger.Configuration.customizeHLTFor2023 import customizeHLTFor2023WithJEC
-process = customizeHLTFor2023WithJEC(process)
+from HLTrigger.Configuration.customizeHLTFor2023 import customizeHLTFor2023WithJEC_v2
+process = customizeHLTFor2023WithJEC_v2(process)
 ```
 
 or you can use directly
 ```
-hltGetConfiguration (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023WithJEC
+hltGetConfiguration (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023WithJEC_v2
 ```
 
 or you can use it in cmsDriver:
 ```
-cmsDriver.py step2 (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023WithJEC
+cmsDriver.py step2 (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023WithJEC_v2
 ```
 
 Example 1:
@@ -39,7 +39,7 @@ hltGetConfiguration /dev/CMSSW_13_0_0/GRun/V24 \
    --unprescale \
    --output minimal \
    --max-events 100 \
-   --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023WithJEC \
+   --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023WithJEC_v2 \
    --eras Run3 \
    --input /store/data/Run2022G/EphemeralHLTPhysics3/RAW/v1/000/362/720/00000/850a6b3c-6eef-424c-9dad-da1e678188f3.root \
    > hltData.py
@@ -75,7 +75,7 @@ hltGetConfiguration /dev/CMSSW_13_0_0/GRun \
    --output minimal \
    --max-events 100 \
    --customise \
-HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023WithJEC,\
+HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023WithJEC_v2,\
 HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2022L1TMenu \
    --eras Run3 \
    --input /store/data/Run2022G/EphemeralHLTPhysics3/RAW/v1/000/362/720/00000/850a6b3c-6eef-424c-9dad-da1e678188f3.root \
@@ -84,7 +84,7 @@ HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2022L1TMenu \
 
 ### Note
 
-You can use separately the functions `customizeHLTFor2023.customizePFHadronCalibrationFor2023` and `customizeHLTFor2023.customizeHCALFor2023`, and `customizeHLTFor2023.customizeJECFor2023_noAK8CaloHLT`.
+You can use separately the functions `customizeHLTFor2023.customizePFHadronCalibrationFor2023` and `customizeHLTFor2023.customizeHCALFor2023`, `customizeHLTFor2023.customizeJECFor2023_noAK8CaloHLT`, and `customizeHLTFor2023.customizeJECFor2023_noAK8CaloHLT`.
 
 ### References
 
