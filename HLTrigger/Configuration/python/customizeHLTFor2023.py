@@ -122,18 +122,18 @@ def customizeJECFor2023_v2(process):
         process.GlobalTag.toGet.append(
             cms.PSet(
                 record = cms.string("JetCorrectionsRecord"),
-                label = cms.untracked.string('AK8PFHLT'),
+                label = cms.untracked.string('AK8CaloHLT'),
                 connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/JME/Run3Winter23/Run3Winter23Digi.db"),
-                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8PFHLT'),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8CaloHLT'),
                 snapshotTime = cms.string('9999-12-31 23:59:59.000'),
             )
         )
         process.GlobalTag.toGet.append(
             cms.PSet(
                 record = cms.string("JetCorrectionsRecord"),
-                label = cms.untracked.string('AK8CaloHLT'),
+                label = cms.untracked.string('AK8PFHLT'),
                 connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/JME/Run3Winter23/Run3Winter23Digi.db"),
-                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8CaloHLT'),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8PFHLT'),
                 snapshotTime = cms.string('9999-12-31 23:59:59.000'),
             )
         )
