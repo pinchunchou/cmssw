@@ -7,22 +7,6 @@ customizeHLTFor2023_v3_NoCaloJEC includes:
 - new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
 - old 2022 Jet Energy Correction for Calo jets (AK4CaloHLT, AK8CaloHLT) --> to be updated
 
-The OBSOLETE customization functions are as follows.
-
-customizeHLTFor2023_v2 (OBSOLETE):
-- new 2023 HCAL PF rechits thresholds
-- old 2022 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll) --> WRONG! 
-- new 2023 PF hadron calibration
-- new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
-- new 2023 Jet Energy Correction for Calo jets (AK4CaloHLT, AK8CaloHLT) obtained with the old 2022 HCAL rechits thresholds in CaloJets --> WRONG!
-
-customizeJECFor2023_noAK8CaloHLT (OBSOLETE):
-- new 2023 HCAL PF rechits thresholds
-- old 2022 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll) --> WRONG! 
-- new 2023 PF hadron calibration
-- new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
-- new 2023 Jet Energy Correction for Calo jets obtained with the old 2022 HCAL rechits thresholds in CaloJets, only for AK4CaloHLT --> WRONG!
-
 
 ```
 cmsrel CMSSW_13_0_0
@@ -76,6 +60,25 @@ cmsRun step2_L1REPACK_HLT.py >& log &
 Example-1 extracts from ConfDB the menu `GRun/V24`, which is the last version of the GRun menu compatible with the last L1T menu of 2022, i.e. [`L1Menu_Collisions2022_v1_4_0`](https://htmlpreview.github.io/?https://github.com/cms-l1-dpg/L1MenuRun3/blob/57fcce7ecf26366084813755f769f47be58bbf5f/development/L1Menu_Collisions2022_v1_4_0/L1Menu_Collisions2022_v1_4_0.html).
 
 Example-2 uses the version of the GRun menu available in the CMSSW release; for `CMSSW_13_0_0`, this corresponds to `GRun/V14`.
+
+### Obsolete customization functions
+
+The OBSOLETE customization functions are:
+
+customizeHLTFor2023_v2 (OBSOLETE):
+- new 2023 HCAL PF rechits thresholds
+- old 2022 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll) --> WRONG! 
+- new 2023 PF hadron calibration
+- new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
+- new 2023 Jet Energy Correction for Calo jets (AK4CaloHLT, AK8CaloHLT) obtained with the old 2022 HCAL rechits thresholds in CaloJets --> WRONG!
+
+customizeJECFor2023_noAK8CaloHLT (OBSOLETE):
+- new 2023 HCAL PF rechits thresholds
+- old 2022 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll) --> WRONG! 
+- new 2023 PF hadron calibration
+- new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
+- new 2023 Jet Energy Correction for Calo jets obtained with the old 2022 HCAL rechits thresholds in CaloJets, only for AK4CaloHLT --> WRONG!
+
 
 ### Customization function to run the latest HLT menu on 2022 data collected with L1Menu_Collisions2022_v1_4_0
 
