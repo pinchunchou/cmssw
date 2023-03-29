@@ -51,6 +51,13 @@ def customizeHCAL(process, HCAL_PFclusters, HCAL_PFrechits):
     
     return process
 
+def customizeHCALinCaloJets(process, HCAL_PFclusters, HCAL_PFrechits):
+    if hasattr(process, "hltTowerMakerForAll"):
+        process.hltTowerMakerForAll.HBThreshold  = 0.4
+        process.hltTowerMakerForAll.HBThreshold1 = 0.3
+        process.hltTowerMakerForAll.HBThreshold2 = 0.3
+    return process
+
 def customizePFHadronCalibrationFor2023(process):
     if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
         process.GlobalTag.toGet.append(
@@ -142,6 +149,30 @@ def customizeJECFor2023_v2(process):
             raise Exception("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
     return process
 
+def customizeJECFor2023_v3_noCaloJets(process):
+    if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("JetCorrectionsRecord"),
+                label = cms.untracked.string('AK4PFHLT'),
+                connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/JME/Run3Winter23/Run3Winter23Digi.db"),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK4PFHLT'),
+                snapshotTime = cms.string('9999-12-31 23:59:59.000'),
+            )
+        )
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("JetCorrectionsRecord"),
+                label = cms.untracked.string('AK8PFHLT'),
+                connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/JME/Run3Winter23/Run3Winter23Digi.db"),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8PFHLT'),
+                snapshotTime = cms.string('9999-12-31 23:59:59.000'),
+            )
+        )
+    else:
+            raise Exception("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
+    return process
+
 def customizeHLTFor2023(process):
     process = customizePFHadronCalibrationFor2023(process)
     process = customizeHCALFor2023(process)
@@ -156,6 +187,14 @@ def customizeHLTFor2023WithJEC_v2(process):
     process = customizeJECFor2023_v2(process)
     process = customizeHLTFor2023(process)
     return process
+
+def customizeHLTFor2023_v3_NoCaloJEC(process):
+    process = customizeHCALFor2023(process)
+    process = customizeHCALinCaloJets(process)
+    process = customizePFHadronCalibrationFor2023(process)
+    process = customizeJECFor2023_v3_noCaloJets(process)
+    return process
+
 
 
 
