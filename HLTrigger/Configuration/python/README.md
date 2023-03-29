@@ -9,14 +9,14 @@ customizeHLTFor2023_v3_NoCaloJEC includes:
 
 The OBSOLETE customization functions are as follows.
 
-customizeHLTFor2023_v2:
+customizeHLTFor2023_v2 (OBSOLETE):
 - new 2023 HCAL PF rechits thresholds
 - old 2022 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll) --> WRONG! 
 - new 2023 PF hadron calibration
 - new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
 - new 2023 Jet Energy Correction for Calo jets (AK4CaloHLT, AK8CaloHLT) obtained with the old 2022 HCAL rechits thresholds in CaloJets --> WRONG!
 
-customizeJECFor2023_noAK8CaloHLT:
+customizeJECFor2023_noAK8CaloHLT (OBSOLETE):
 - new 2023 HCAL PF rechits thresholds
 - old 2022 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll) --> WRONG! 
 - new 2023 PF hadron calibration
