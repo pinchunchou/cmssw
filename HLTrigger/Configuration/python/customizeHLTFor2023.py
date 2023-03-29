@@ -51,12 +51,18 @@ def customizeHCAL(process, HCAL_PFclusters, HCAL_PFrechits):
     
     return process
 
-def customizeHCALinCaloJets(process, HCAL_PFclusters, HCAL_PFrechits):
+def customizeHCALinCaloJets(process, HCAL_PFrechits):
     if hasattr(process, "hltTowerMakerForAll"):
-        process.hltTowerMakerForAll.HBThreshold  = 0.4
-        process.hltTowerMakerForAll.HBThreshold1 = 0.3
-        process.hltTowerMakerForAll.HBThreshold2 = 0.3
+        process.hltTowerMakerForAll.HBThreshold1 = HCAL_PFrechits[0]
+        process.hltTowerMakerForAll.HBThreshold2 = HCAL_PFrechits[1]
+        process.hltTowerMakerForAll.HBThreshold  = HCAL_PFrechits[2]
     return process
+
+def customizeHCALinCaloJetsFor2023(process):
+    return customizeHCALinCaloJets(process, HCAL_PFrechits_2023)
+
+def customizeHCALinCaloJetsFor2022(process):
+    return customizeHCALinCaloJets(process, HCAL_PFrechits_2022)
 
 def customizePFHadronCalibrationFor2023(process):
     if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
@@ -189,10 +195,10 @@ def customizeHLTFor2023WithJEC_v2(process):
     return process
 
 def customizeHLTFor2023_v3_NoCaloJEC(process):
-    process = customizeHCALFor2023(process)
-    process = customizeHCALinCaloJets(process)
-    process = customizePFHadronCalibrationFor2023(process)
     process = customizeJECFor2023_v3_noCaloJets(process)
+    process = customizePFHadronCalibrationFor2023(process)
+    process = customizeHCALFor2023(process)
+    process = customizeHCALinCaloJetsFor2023(process)
     return process
 
 
