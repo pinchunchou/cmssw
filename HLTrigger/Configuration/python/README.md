@@ -1,27 +1,34 @@
 ### HLT customization functions for 2023 Run-3 studies
 
-customizeHLTFor2023_v3_NoCaloJEC includes:
+customizeHLTFor2023_v3 includes:
+- new 2023 HCAL PF rechits thresholds
+- new 2023 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll)
+- new 2023 PF hadron calibration
+- new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
+- new 2022 Jet Energy Correction for Calo jets (AK4CaloHLT, AK8CaloHLT)
+
+The OBSOLETE customization functions are as follows.
+
+customizeHLTFor2023_v3_NoCaloJEC:
 - new 2023 HCAL PF rechits thresholds
 - new 2023 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll)
 - new 2023 PF hadron calibration
 - new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
 - old 2022 Jet Energy Correction for Calo jets (AK4CaloHLT, AK8CaloHLT) --> to be updated
 
-The OBSOLETE customization functions are as follows.
-
 customizeHLTFor2023_v2:
 - new 2023 HCAL PF rechits thresholds
 - old 2022 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll) --> WRONG! 
 - new 2023 PF hadron calibration
 - new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
-- new 2023 Jet Energy Correction for Calo jets (AK4CaloHLT, AK8CaloHLT) obtained with the old 2022 HCAL rechits thresholds in CaloJets --> WRONG!
+- bugged 2023 Jet Energy Correction for Calo jets (AK4CaloHLT, AK8CaloHLT) obtained with the old 2022 HCAL rechits thresholds in CaloJets --> WRONG!
 
 customizeJECFor2023_noAK8CaloHLT:
 - new 2023 HCAL PF rechits thresholds
 - old 2022 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll) --> WRONG! 
 - new 2023 PF hadron calibration
 - new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
-- new 2023 Jet Energy Correction for Calo jets obtained with the old 2022 HCAL rechits thresholds in CaloJets, only for AK4CaloHLT --> WRONG!
+- bugged 2023 Jet Energy Correction for Calo jets obtained with the old 2022 HCAL rechits thresholds in CaloJets, only for AK4CaloHLT --> WRONG!
 
 
 ```
@@ -36,18 +43,18 @@ hltGetConfiguration (....) > hlt.py
 then you can call the customization function(s) by adding at the bottom of your `hlt.py`, as usual. Example:
 
 ```
-from HLTrigger.Configuration.customizeHLTFor2023 import customizeHLTFor2023_v3_NoCaloJEC
-process = customizeHLTFor2023_v3_NoCaloJEC(process)
+from HLTrigger.Configuration.customizeHLTFor2023 import customizeHLTFor2023_v3
+process = customizeHLTFor2023_v3(process)
 ```
 
 or you can use directly
 ```
-hltGetConfiguration (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v3_NoCaloJEC
+hltGetConfiguration (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v3
 ```
 
 or you can use it in cmsDriver:
 ```
-cmsDriver.py step2 (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v3_NoCaloJEC
+cmsDriver.py step2 (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v3
 ```
 
 Example 1:
@@ -58,7 +65,7 @@ hltGetConfiguration /dev/CMSSW_13_0_0/GRun/V24 \
    --unprescale \
    --output minimal \
    --max-events 100 \
-   --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v3_NoCaloJEC \
+   --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v3 \
    --eras Run3 \
    --input /store/data/Run2022G/EphemeralHLTPhysics3/RAW/v1/000/362/720/00000/850a6b3c-6eef-424c-9dad-da1e678188f3.root \
    > hltData.py
@@ -94,7 +101,7 @@ hltGetConfiguration /dev/CMSSW_13_0_0/GRun \
    --output minimal \
    --max-events 100 \
    --customise \
-HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v3_NoCaloJEC,\
+HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v3,\
 HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2022L1TMenu \
    --eras Run3 \
    --input /store/data/Run2022G/EphemeralHLTPhysics3/RAW/v1/000/362/720/00000/850a6b3c-6eef-424c-9dad-da1e678188f3.root \
