@@ -79,6 +79,19 @@ def customizePFHadronCalibrationFor2023(process):
             raise Exception("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
     return process
 
+def customizePFHadronCalibrationFor2023_fromCondDb(process):
+    if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("PFCalibrationRcd"),
+                label = cms.untracked.string('HLT'),
+                tag = cms.string('PFCalibration_Run3Winter23Digi_mc_v2'),
+            )
+        )
+    else:
+            raise Exception("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
+    return process
+
 def customizeJECFor2023_noAK8CaloHLT(process):
     if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
         process.GlobalTag.toGet.append(
@@ -223,6 +236,40 @@ def customizeJECFor2023_v3(process):
             raise Exception("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
     return process
 
+def customizeJECFor2023_v3_fromCondDb(process):
+    if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("JetCorrectionsRecord"),
+                label = cms.untracked.string('AK4PFHLT'),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK4PFHLT_mc_v2'),
+            )
+        )
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("JetCorrectionsRecord"),
+                label = cms.untracked.string('AK8PFHLT'),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8PFHLT_mc_v2'),
+            )
+        )
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("JetCorrectionsRecord"),
+                label = cms.untracked.string('AK4CaloHLT'),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK4CaloHLT_mc_v2'),
+            )
+        )
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("JetCorrectionsRecord"),
+                label = cms.untracked.string('AK8CaloHLT'),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8CaloHLT_mc_v2'),
+            )
+        )
+    else:
+            raise Exception("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
+    return process
+
 def customizeHLTFor2023(process):
     process = customizePFHadronCalibrationFor2023(process)
     process = customizeHCALFor2023(process)
@@ -252,6 +299,12 @@ def customizeHLTFor2023_v3(process):
     process = customizeHCALinCaloJetsFor2023(process)
     return process
 
+def customizeHLTFor2023_v3_fromCondDb(process):
+    process = customizeJECFor2023_v3_fromCondDb(process)
+    process = customizePFHadronCalibrationFor2023_fromCondDb(process)
+    process = customizeHCALFor2023(process)
+    process = customizeHCALinCaloJetsFor2023(process)
+    return process
 
 
 
