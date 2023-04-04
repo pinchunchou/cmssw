@@ -1,11 +1,13 @@
 ### HLT customization functions for 2023 Run-3 studies
 
-customizeHLTFor2023_v3 includes:
+customizeHLTFor2023_v3_fromCondDb includes:
 - new 2023 HCAL PF rechits thresholds
 - new 2023 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll)
 - new 2023 PF hadron calibration
 - new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
 - new 2022 Jet Energy Correction for Calo jets (AK4CaloHLT, AK8CaloHLT)
+
+customizeHLTFor2023_v3 is identical to customizeHLTFor2023_v3_fromCondDb but the calibration and corrections are taken from an external file instead of using conddb.
 
 The OBSOLETE customization functions are as follows.
 
