@@ -284,14 +284,13 @@ def customizeJECFor2023_v3_fromCondDb(process):
             raise Exception("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
     return process
 
-def customizePFHadronCalibrationFor2023_v4_fromFile(process):
+def customizePFHadronCalibrationFor2023_v4_fromCondDb(process):
     if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
         process.GlobalTag.toGet.append(
             cms.PSet(
                 record = cms.string("PFCalibrationRcd"),
                 label = cms.untracked.string('HLT'),
-                connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/PF/PFCalibration_v4.db"),
-                tag = cms.string('PFCalibration_CMSSW_13_0_0_HLT_126X_mcRun3_2023'),
+                tag = cms.string('PFCalibration_Run3Winter23Digi_mc_v3'),
                 snapshotTime = cms.string('9999-12-31 23:59:59.000'),
             )
         )
@@ -299,14 +298,13 @@ def customizePFHadronCalibrationFor2023_v4_fromFile(process):
             raise Exception("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
     return process
 
-def customizeJECFor2023_v4_fromFile(process):
+def customizeJECFor2023_v4_fromCondDb(process):
     if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
         process.GlobalTag.toGet.append(
             cms.PSet(
                 record = cms.string("JetCorrectionsRecord"),
                 label = cms.untracked.string('AK4PFHLT'),
-                connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/JME/Run3Winter23/Run3Winter23Digi_v4.db"),
-                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK4PFHLT'),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK4PFHLT_mc_v3'),
                 snapshotTime = cms.string('9999-12-31 23:59:59.000'),
             )
         )
@@ -314,8 +312,7 @@ def customizeJECFor2023_v4_fromFile(process):
             cms.PSet(
                 record = cms.string("JetCorrectionsRecord"),
                 label = cms.untracked.string('AK8PFHLT'),
-                connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/JME/Run3Winter23/Run3Winter23Digi_v4.db"),
-                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8PFHLT'),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8PFHLT_mc_v3'),
                 snapshotTime = cms.string('9999-12-31 23:59:59.000'),
             )
         )
@@ -323,8 +320,7 @@ def customizeJECFor2023_v4_fromFile(process):
             cms.PSet(
                 record = cms.string("JetCorrectionsRecord"),
                 label = cms.untracked.string('AK4CaloHLT'),
-                connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/JME/Run3Winter23/Run3Winter23Digi_v4.db"),
-                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK4CaloHLT'),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK4CaloHLT_mc_v3'),
                 snapshotTime = cms.string('9999-12-31 23:59:59.000'),
             )
         )
@@ -332,8 +328,7 @@ def customizeJECFor2023_v4_fromFile(process):
             cms.PSet(
                 record = cms.string("JetCorrectionsRecord"),
                 label = cms.untracked.string('AK8CaloHLT'),
-                connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/JME/Run3Winter23/Run3Winter23Digi_v4.db"),
-                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8CaloHLT'),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8CaloHLT_mc_v3'),
                 snapshotTime = cms.string('9999-12-31 23:59:59.000'),
             )
         )
@@ -377,9 +372,9 @@ def customizeHLTFor2023_v3_fromCondDb(process):
     process = customizeHCALinCaloJetsFor2023(process)
     return process
 
-def customizeHLTFor2023_v4_fromFile(process):
-    process = customizeJECFor2023_v4_fromFile(process)
-    process = customizePFHadronCalibrationFor2023_v4_fromFile(process)
+def customizeHLTFor2023_v4(process):
+    process = customizeJECFor2023_v4_fromCondDb(process)
+    process = customizePFHadronCalibrationFor2023_v4_fromCondDb(process)
     process = customizeHCALFor2023(process)
     process = customizeHCALinCaloJetsFor2023_v4(process)
     return process

@@ -1,6 +1,6 @@
 ### HLT customization functions for 2023 Run-3 studies
 
-customizeHLTFor2023_v4_fromFile includes:
+customizeHLTFor2023_v4 includes:
 - new 2023 HCAL PF rechits thresholds
 - new 2023 HCAL rechits thresholds in all calo towers (not only hltTowerMakerForAll)
 - new 2023 PF hadron calibration
