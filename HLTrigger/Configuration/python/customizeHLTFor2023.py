@@ -58,11 +58,25 @@ def customizeHCALinCaloJets(process, HCAL_PFrechits):
         process.hltTowerMakerForAll.HBThreshold  = HCAL_PFrechits[2]
     return process
 
+def customizeHCALinCaloJets_v4(process, HCAL_PFrechits):
+    for mod in producers_by_type(process, 'CaloTowersCreator'):
+        mod.HBThreshold1 = HCAL_PFrechits[0]
+        mod.HBThreshold2 = HCAL_PFrechits[1]
+        mod.HBThreshold  = HCAL_PFrechits[2]
+    return process
+
 def customizeHCALinCaloJetsFor2023(process):
     return customizeHCALinCaloJets(process, HCAL_PFrechits_2023)
 
 def customizeHCALinCaloJetsFor2022(process):
     return customizeHCALinCaloJets(process, HCAL_PFrechits_2022)
+
+def customizeHCALinCaloJetsFor2023_v4(process):
+    return customizeHCALinCaloJets_v4(process, HCAL_PFrechits_2023)
+
+def customizeHCALinCaloJetsFor2022_v4(process):
+    return customizeHCALinCaloJets_v4(process, HCAL_PFrechits_2022)
+
 
 def customizePFHadronCalibrationFor2023(process):
     if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
@@ -270,6 +284,63 @@ def customizeJECFor2023_v3_fromCondDb(process):
             raise Exception("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
     return process
 
+def customizePFHadronCalibrationFor2023_v4_fromFile(process):
+    if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("PFCalibrationRcd"),
+                label = cms.untracked.string('HLT'),
+                connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/PF/PFCalibration_v4.db"),
+                tag = cms.string('PFCalibration_CMSSW_13_0_0_HLT_126X_mcRun3_2023'),
+                snapshotTime = cms.string('9999-12-31 23:59:59.000'),
+            )
+        )
+    else:
+            raise Exception("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
+    return process
+
+def customizeJECFor2023_v4_fromFile(process):
+    if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("JetCorrectionsRecord"),
+                label = cms.untracked.string('AK4PFHLT'),
+                connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/JME/Run3Winter23/Run3Winter23Digi_v4.db"),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK4PFHLT'),
+                snapshotTime = cms.string('9999-12-31 23:59:59.000'),
+            )
+        )
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("JetCorrectionsRecord"),
+                label = cms.untracked.string('AK8PFHLT'),
+                connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/JME/Run3Winter23/Run3Winter23Digi_v4.db"),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8PFHLT'),
+                snapshotTime = cms.string('9999-12-31 23:59:59.000'),
+            )
+        )
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("JetCorrectionsRecord"),
+                label = cms.untracked.string('AK4CaloHLT'),
+                connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/JME/Run3Winter23/Run3Winter23Digi_v4.db"),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK4CaloHLT'),
+                snapshotTime = cms.string('9999-12-31 23:59:59.000'),
+            )
+        )
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("JetCorrectionsRecord"),
+                label = cms.untracked.string('AK8CaloHLT'),
+                connect = cms.string("sqlite_file:/eos/cms/store/group/dpg_trigger/comm_trigger/TriggerStudiesGroup/JME/Run3Winter23/Run3Winter23Digi_v4.db"),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8CaloHLT'),
+                snapshotTime = cms.string('9999-12-31 23:59:59.000'),
+            )
+        )
+    else:
+            raise Exception("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
+    return process
+
 def customizeHLTFor2023(process):
     process = customizePFHadronCalibrationFor2023(process)
     process = customizeHCALFor2023(process)
@@ -306,6 +377,12 @@ def customizeHLTFor2023_v3_fromCondDb(process):
     process = customizeHCALinCaloJetsFor2023(process)
     return process
 
+def customizeHLTFor2023_v4_fromFile(process):
+    process = customizeJECFor2023_v4_fromFile(process)
+    process = customizePFHadronCalibrationFor2023_v4_fromFile(process)
+    process = customizeHCALFor2023(process)
+    process = customizeHCALinCaloJetsFor2023_v4(process)
+    return process
 
 
 def customizeHLTFor2022L1TMenu(process):
