@@ -1,35 +1,45 @@
 ### HLT customization functions for 2023 Run-3 studies
 
-customizeHLTFor2023_v3_fromCondDb includes:
+customizeHLTFor2023_v4_fromFile includes:
 - new 2023 HCAL PF rechits thresholds
-- new 2023 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll)
+- new 2023 HCAL rechits thresholds in all calo towers (not only hltTowerMakerForAll)
 - new 2023 PF hadron calibration
 - new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
 - new 2022 Jet Energy Correction for Calo jets (AK4CaloHLT, AK8CaloHLT)
 
-customizeHLTFor2023_v3 is identical to customizeHLTFor2023_v3_fromCondDb but the calibration and corrections are taken from an external file instead of using conddb.
+customizeHLTFor2023_v4 is similar to customizeHLTFor2023_v3_fromCondDb but 
+- it extends the new HCAL rechits threshold to all calo towers (not only hltTowerMakerForAll)
+- update the PF hadron calibration and Jet Energy Correction after the fix presented at TSG meeting on April 13. This fix should give a **small** effect.
+
 
 The OBSOLETE customization functions are as follows.
+
+customizeHLTFor2023_v3_fromCondDb includes:
+- new 2023 HCAL PF rechits thresholds
+- new 2023 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll)
+- previous 2023 PF hadron calibration
+- previous 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
+- previous 2022 Jet Energy Correction for Calo jets (AK4CaloHLT, AK8CaloHLT)
 
 customizeHLTFor2023_v3_NoCaloJEC:
 - new 2023 HCAL PF rechits thresholds
 - new 2023 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll)
-- new 2023 PF hadron calibration
-- new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
+- previous 2023 PF hadron calibration
+- previous 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
 - old 2022 Jet Energy Correction for Calo jets (AK4CaloHLT, AK8CaloHLT) --> to be updated
 
 customizeHLTFor2023_v2:
 - new 2023 HCAL PF rechits thresholds
 - old 2022 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll) --> WRONG! 
-- new 2023 PF hadron calibration
-- new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
+- previous 2023 PF hadron calibration
+- previous 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
 - bugged 2023 Jet Energy Correction for Calo jets (AK4CaloHLT, AK8CaloHLT) obtained with the old 2022 HCAL rechits thresholds in CaloJets --> WRONG!
 
 customizeJECFor2023_noAK8CaloHLT:
 - new 2023 HCAL PF rechits thresholds
 - old 2022 HCAL rechits thresholds in CaloJets (hltTowerMakerForAll) --> WRONG! 
-- new 2023 PF hadron calibration
-- new 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
+- previous 2023 PF hadron calibration
+- previous 2023 Jet Energy Correction for PF jets (AK4PFHLT, AK8PFHLT)
 - bugged 2023 Jet Energy Correction for Calo jets obtained with the old 2022 HCAL rechits thresholds in CaloJets, only for AK4CaloHLT --> WRONG!
 
 
@@ -142,3 +152,5 @@ You can use separately the functions `customizeHLTFor2023.customizePFHadronCalib
  - Changgi's slides at JetMET trigger (PF hadron calibration): [[Indico link]](https://indico.cern.ch/event/1258851/)
 
  - Changgi's slides at TSG (JEC): [[Indico link]](https://indico.cern.ch/event/1265018/#36-new-hlt-jec)
+
+ - Changgi's slides at TSG, fix (PFHC, JEC, April 13): [[Indico link]](https://indico.cern.ch/event/1272814/#sc-1-6-jetsmet-pog)
