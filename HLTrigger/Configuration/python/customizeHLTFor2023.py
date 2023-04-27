@@ -78,6 +78,63 @@ def customizeHCALinCaloJetsFor2022_v4(process):
     return customizeHCALinCaloJets_v4(process, HCAL_PFrechits_2022)
 
 
+def customizePFHadronCalibrationFor2023_v5_fromFile(process):
+    if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("PFCalibrationRcd"),
+                label = cms.untracked.string('HLT'),
+                connect = cms.string("sqlite_file:/afs/cern.ch/work/s/sdonato/public/TSG2023/PFCalibration_v5.db"),
+                tag = cms.string('PFCalibration_CMSSW_13_0_0_HLT_126X_fixEE_mcRun3_2023'),
+                snapshotTime = cms.string('9999-12-31 23:59:59.000'),
+            )
+        )
+    else:
+            raise Exception("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
+    return process
+
+def customizeJECFor2023_v5_fromFile(process):
+    if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("JetCorrectionsRecord"),
+                label = cms.untracked.string('AK4CaloHLT'),
+                connect = cms.string("sqlite_file:/afs/cern.ch/work/s/sdonato/public/TSG2023/Run3Winter23Digi_v5.db"),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK4CaloHLT'),
+                snapshotTime = cms.string('9999-12-31 23:59:59.000'),
+            )
+        )
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("JetCorrectionsRecord"),
+                label = cms.untracked.string('AK4PFHLT'),
+                connect = cms.string("sqlite_file:/afs/cern.ch/work/s/sdonato/public/TSG2023/Run3Winter23Digi_v5.db"),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK4PFHLT'),
+                snapshotTime = cms.string('9999-12-31 23:59:59.000'),
+            )
+        )
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("JetCorrectionsRecord"),
+                label = cms.untracked.string('AK8CaloHLT'),
+                connect = cms.string("sqlite_file:/afs/cern.ch/work/s/sdonato/public/TSG2023/Run3Winter23Digi_v5.db"),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8CaloHLT'),
+                snapshotTime = cms.string('9999-12-31 23:59:59.000'),
+            )
+        )
+        process.GlobalTag.toGet.append(
+            cms.PSet(
+                record = cms.string("JetCorrectionsRecord"),
+                label = cms.untracked.string('AK8PFHLT'),
+                connect = cms.string("sqlite_file:/afs/cern.ch/work/s/sdonato/public/TSG2023/Run3Winter23Digi_v5.db"),
+                tag = cms.string('JetCorrectorParametersCollection_Run3Winter23Digi_AK8PFHLT'),
+                snapshotTime = cms.string('9999-12-31 23:59:59.000'),
+            )
+        )
+    else:
+            raise Exception("Warning process.GlobalTag not found. customizePFHadronCalibration will not be applied.")
+    return process
+
 def customizePFHadronCalibrationFor2023(process):
     if hasattr(process, "GlobalTag") and hasattr(process.GlobalTag, "toGet"):
         process.GlobalTag.toGet.append(
@@ -377,6 +434,17 @@ def customizeHLTFor2023_v4(process):
     process = customizePFHadronCalibrationFor2023_v4_fromCondDb(process)
     process = customizeHCALFor2023(process)
     process = customizeHCALinCaloJetsFor2023_v4(process)
+    return process
+
+def customizeHLTFor2023_onlyHCALrechits(process):
+    process = customizeHCALFor2023(process)
+    process = customizeHCALinCaloJetsFor2023_v4(process)
+    return process
+
+def customizeHLTFor2023_v5_fromFile(process):
+    process = customizeHLTFor2023_onlyHCALrechits(process)
+    process = customizeJECFor2023_v5_fromFile(process)
+    process = customizePFHadronCalibrationFor2023_v5_fromFile(process)
     return process
 
 
