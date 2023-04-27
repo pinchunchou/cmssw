@@ -1,12 +1,12 @@
 ### HLT customization functions for 2023 Run-3 studies
 
-customizeHLTFor2023_v5 includes:
+customizeHLTFor2023_v5_fromFile includes:
 - customizeHLTFor2023_onlyHCALrechits <---- apply the new HCAL rechits to all PF and calo jet modules.
 - customizeJECFor2023_v5_fromFile <---- load the latest JEC obtained on April 27
 - customizePFHadronCalibrationFor2023_v5_fromFile <---- load the latest JEC obtained on April 27 for both PF and calo jets
 
-All previous JEC and PF hadron calibration are wrong because of the ECAL bug.
-To get the fixed ECAL tag please use 126X_mcRun3_2023_forPU65_v4
+All previous JEC and PF hadron calibration are wrong because of the ECAL bug in the MC global tag.
+To get the fixed ECAL tag in MC please use 126X_mcRun3_2023_forPU65_v4. For data, please use the usual global tag.
 
 ```
 cmsrel CMSSW_13_0_0
@@ -20,18 +20,18 @@ hltGetConfiguration (....) > hlt.py
 then you can call the customization function(s) by adding at the bottom of your `hlt.py`, as usual. Example:
 
 ```
-from HLTrigger.Configuration.customizeHLTFor2023 import customizeHLTFor2023_v3
-process = customizeHLTFor2023_v3(process)
+from HLTrigger.Configuration.customizeHLTFor2023 import customizeHLTFor2023_v5_fromFile
+process = customizeHLTFor2023_v5_fromFile(process)
 ```
 
 or you can use directly
 ```
-hltGetConfiguration (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v3
+hltGetConfiguration (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v5_fromFile
 ```
 
 or you can use it in cmsDriver:
 ```
-cmsDriver.py step2 (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v3
+cmsDriver.py step2 (...) --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v5_fromFile
 ```
 
 Example 1:
@@ -42,7 +42,7 @@ hltGetConfiguration /dev/CMSSW_13_0_0/GRun/V24 \
    --unprescale \
    --output minimal \
    --max-events 100 \
-   --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v3 \
+   --customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v5_fromFile \
    --eras Run3 \
    --input /store/data/Run2022G/EphemeralHLTPhysics3/RAW/v1/000/362/720/00000/850a6b3c-6eef-424c-9dad-da1e678188f3.root \
    > hltData.py
@@ -97,7 +97,7 @@ hltGetConfiguration /dev/CMSSW_13_0_0/GRun \
    --output minimal \
    --max-events 100 \
    --customise \
-HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v3,\
+HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v5_fromFile,\
 HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2022L1TMenu \
    --eras Run3 \
    --input /store/data/Run2022G/EphemeralHLTPhysics3/RAW/v1/000/362/720/00000/850a6b3c-6eef-424c-9dad-da1e678188f3.root \
