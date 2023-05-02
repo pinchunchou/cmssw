@@ -448,46 +448,64 @@ def customizeHLTFor2023_v5_fromFile(process):
     return process
 
 
-def customizeHLTFor2022L1TMenu(process):
+def _updateL1TSeedModules(process, l1tMenu):
 
-    dictL1TSeeds2022 = {
-
-      # BPH (Tau3Mu)
-      'hltL1sTripleMuControl': 'L1_TripleMu_5SQ_3SQ_0OQ',
-      'hltL1sDoubleMu0er2p0SQOSdEtaMax1p6orTripleMu21p50': 'L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p6 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p5 OR L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4 OR L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9 OR L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9 OR L1_TripleMu_2SQ_1p5SQ_0OQ_Mass_Max12 OR L1_DoubleMu4_SQ_OS_dR_Max1p2 OR L1_DoubleMu4p5_SQ_OS_dR_Max1p2',
-
-      # BTV
-      'hltL1sDiJet16er2p5Mu3dRMax0p4': 'L1_Mu3_Jet16er2p5_dR_Max0p4',
-      'hltL1sDiJet35er2p5Mu3dRMax0p4': 'L1_Mu3_Jet35er2p5_dR_Max0p4',
-      'hltL1sDiJet60er2p5Mu3dRMax0p4': 'L1_Mu3_Jet60er2p5_dR_Max0p4',
-      'hltL1sDiJet80er2p5Mu3dRMax0p4': 'L1_Mu3_Jet80er2p5_dR_Max0p4',
-      'hltL1sDiJet120er2p5Mu3dRMax0p8': 'L1_Mu3_Jet120er2p5_dR_Max0p8',
-
-      # JME
-      'hltL1sSingleJet35Fwd': 'L1_SingleJet35_FWD3p0',
-      'hltL1sSingleJet35OrZeroBias': 'L1_SingleJet35 OR L1_SingleJet35_FWD3p0 OR L1_ZeroBias',
-      'hltL1sSingleJet60Fwd': 'L1_SingleJet60_FWD3p0',
-      'hltL1sSingleJet60Or60Fwd': 'L1_SingleJet60 OR L1_SingleJet60_FWD3p0',
-      'hltL1sSingleJet90Fwd': 'L1_SingleJet90_FWD3p0',
-      'hltL1sV0SingleJet60Or60Fwd': 'L1_SingleJet60 OR L1_SingleJet60_FWD3p0 OR L1_SingleJet90 OR L1_SingleJet90_FWD3p0',
-      'hltL1sSingleJet120Fwd': 'L1_SingleJet120_FWD3p0',
-      'hltL1sSingleJet120Or120Fwd': 'L1_SingleJet120 OR L1_SingleJet120_FWD3p0',
-
-      # HIG (VBF HTauTau)
-      'hltL1VBFDiJetIsoTau': 'L1_DoubleJet35_Mass_Min450_IsoTau45er2p1_RmOvlp_dR0p5',
-
-      # BPH (BsMuMu)
-      'hltL1sDoubleMuForBs': 'L1_DoubleMu3er2p0_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p6 OR L1_DoubleMu0er1p4_OQ_OS_dEta_Max1p6 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p5 OR L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4 OR L1_DoubleMu4p5_SQ_OS_dR_Max1p2 OR L1_DoubleMu4_SQ_OS_dR_Max1p2',
-      'hltL1sDoubleMuForBsToMMG': 'L1_DoubleMu3er2p0_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p6 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p5 OR L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4 OR L1_DoubleMu4p5_SQ_OS_dR_Max1p2 OR L1_DoubleMu4_SQ_OS_dR_Max1p2',
-      'hltL1sDoubleMuForLowMassDisplaced': 'L1_DoubleMu3er2p0_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p6 OR L1_DoubleMu0er1p4_OQ_OS_dEta_Max1p6 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p5 OR L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4 OR L1_DoubleMu4p5_SQ_OS_dR_Max1p2 OR L1_DoubleMu4_SQ_OS_dR_Max1p2',
-      'hltL1sDoubleMuForLowMassInclusive': 'L1_DoubleMu3er2p0_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p6 OR L1_DoubleMu0er1p4_OQ_OS_dEta_Max1p6 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p5 OR L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4 OR L1_DoubleMu4p5_SQ_OS_dR_Max1p2 OR L1_DoubleMu4_SQ_OS_dR_Max1p2',
-
-      # SMP (W->3pi)
-      'hltL1sDoubleTauBigORWithLowMass': 'L1_DoubleIsoTau34er2p1 OR L1_DoubleIsoTau36er2p1 OR L1_DoubleTau70er2p1 OR L1_DoubleIsoTau28er2p1_Mass_Max80 OR L1_DoubleIsoTau30er2p1_Mass_Max80',
+    dictL1TSeeds = {
+      # VBF Parking (exclusive seeds)
+      'hltL1DiJetVBFdoubleJet': 'L1_DoubleJet_110_35_DoubleJet35_Mass_Min620',
+      'hltL1DiJetVBFMET': 'L1_DoubleJet_110_35_DoubleJet35_Mass_Min620',
+      'hltL1DoubleJet8030MassMin500Mu3': 'L1_DoubleJet_110_35_DoubleJet35_Mass_Min620',
+      'hltL1VBFIsoEG': 'L1_DoubleJet_110_35_DoubleJet35_Mass_Min620',
     }
 
-    for modName,oldSeed in dictL1TSeeds2022.items():
+    if l1tMenu == '2022_v1_4_0':
+
+        dictL1TSeeds.update({
+          # BPH (Tau3Mu)
+          'hltL1sTripleMuControl': 'L1_TripleMu_5SQ_3SQ_0OQ',
+          'hltL1sDoubleMu0er2p0SQOSdEtaMax1p6orTripleMu21p50': 'L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p6 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p5 OR L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4 OR L1_TripleMu_5SQ_3SQ_0_DoubleMu_5_3_SQ_OS_Mass_Max9 OR L1_TripleMu_5SQ_3SQ_0OQ_DoubleMu_5_3_SQ_OS_Mass_Max9 OR L1_TripleMu_2SQ_1p5SQ_0OQ_Mass_Max12 OR L1_DoubleMu4_SQ_OS_dR_Max1p2 OR L1_DoubleMu4p5_SQ_OS_dR_Max1p2',
+
+          # BTV
+          'hltL1sDiJet16er2p5Mu3dRMax0p4': 'L1_Mu3_Jet16er2p5_dR_Max0p4',
+          'hltL1sDiJet35er2p5Mu3dRMax0p4': 'L1_Mu3_Jet35er2p5_dR_Max0p4',
+          'hltL1sDiJet60er2p5Mu3dRMax0p4': 'L1_Mu3_Jet60er2p5_dR_Max0p4',
+          'hltL1sDiJet80er2p5Mu3dRMax0p4': 'L1_Mu3_Jet80er2p5_dR_Max0p4',
+          'hltL1sDiJet120er2p5Mu3dRMax0p8': 'L1_Mu3_Jet120er2p5_dR_Max0p8',
+
+          # JME
+          'hltL1sSingleJet35Fwd': 'L1_SingleJet35_FWD3p0',
+          'hltL1sSingleJet35OrZeroBias': 'L1_SingleJet35 OR L1_SingleJet35_FWD3p0 OR L1_ZeroBias',
+          'hltL1sSingleJet60Fwd': 'L1_SingleJet60_FWD3p0',
+          'hltL1sSingleJet60Or60Fwd': 'L1_SingleJet60 OR L1_SingleJet60_FWD3p0',
+          'hltL1sSingleJet90Fwd': 'L1_SingleJet90_FWD3p0',
+          'hltL1sV0SingleJet60Or60Fwd': 'L1_SingleJet60 OR L1_SingleJet60_FWD3p0 OR L1_SingleJet90 OR L1_SingleJet90_FWD3p0',
+          'hltL1sSingleJet120Fwd': 'L1_SingleJet120_FWD3p0',
+          'hltL1sSingleJet120Or120Fwd': 'L1_SingleJet120 OR L1_SingleJet120_FWD3p0',
+
+          # HIG (VBF HTauTau)
+          'hltL1VBFDiJetIsoTau': 'L1_DoubleJet35_Mass_Min450_IsoTau45er2p1_RmOvlp_dR0p5',
+
+          # BPH (BsMuMu)
+          'hltL1sDoubleMuForBs': 'L1_DoubleMu3er2p0_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p6 OR L1_DoubleMu0er1p4_OQ_OS_dEta_Max1p6 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p5 OR L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4 OR L1_DoubleMu4p5_SQ_OS_dR_Max1p2 OR L1_DoubleMu4_SQ_OS_dR_Max1p2',
+          'hltL1sDoubleMuForBsToMMG': 'L1_DoubleMu3er2p0_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p6 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p5 OR L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4 OR L1_DoubleMu4p5_SQ_OS_dR_Max1p2 OR L1_DoubleMu4_SQ_OS_dR_Max1p2',
+          'hltL1sDoubleMuForLowMassDisplaced': 'L1_DoubleMu3er2p0_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p6 OR L1_DoubleMu0er1p4_OQ_OS_dEta_Max1p6 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p5 OR L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4 OR L1_DoubleMu4p5_SQ_OS_dR_Max1p2 OR L1_DoubleMu4_SQ_OS_dR_Max1p2',
+          'hltL1sDoubleMuForLowMassInclusive': 'L1_DoubleMu3er2p0_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p6 OR L1_DoubleMu0er1p4_OQ_OS_dEta_Max1p6 OR L1_DoubleMu0er2p0_SQ_OS_dEta_Max1p5 OR L1_DoubleMu0er1p4_SQ_OS_dR_Max1p4 OR L1_DoubleMu0er1p5_SQ_OS_dR_Max1p4 OR L1_DoubleMu4p5_SQ_OS_dR_Max1p2 OR L1_DoubleMu4_SQ_OS_dR_Max1p2',
+
+          # SMP (W->3pi)
+          'hltL1sDoubleTauBigORWithLowMass': 'L1_DoubleIsoTau34er2p1 OR L1_DoubleIsoTau36er2p1 OR L1_DoubleTau70er2p1 OR L1_DoubleIsoTau28er2p1_Mass_Max80 OR L1_DoubleIsoTau30er2p1_Mass_Max80',
+        })
+
+    elif l1tMenu != '2023_v1_0_0':
+        raise RuntimeError(f'ERROR -- invalid value for argument "l1tMenu" (must be "2022_v1_4_0", or "2023_v1_0_0"): "{l1tMenu}"')
+
+    for modName,oldSeed in dictL1TSeeds.items():
         try: getattr(process, modName).L1SeedsLogicalExpression = oldSeed
         except: pass
 
     return process
+
+def customizeHLTFor2022L1TMenu(process):
+    return _updateL1TSeedModules(process, l1tMenu = '2022_v1_4_0')
+
+def customizeHLTFor2023L1TMenu_v1_0_0(process):
+    return _updateL1TSeedModules(process, l1tMenu = '2023_v1_0_0')
