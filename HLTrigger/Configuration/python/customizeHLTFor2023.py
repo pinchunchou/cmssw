@@ -8,6 +8,7 @@ HCAL_PFclusters_2022=[0.125, 0.25, 0.35, 0.35]
 HCAL_PFrechits_2022=[0.1, 0.2, 0.3, 0.3]
 
 def customizeHCALFor2023(process):
+    raise Exception("This customizeHLTFor2023 is obsolete. Please use the latest /dev/CMSSW_13_0_0/GRun without any customization function. See https://github.com/silviodonato/cmssw/tree/customizeHLTFor2023/HLTrigger/Configuration/python#readme ")
     return customizeHCAL(process, HCAL_PFclusters_2023, HCAL_PFrechits_2023)
 
 def customizeHCALFor2022(process):
