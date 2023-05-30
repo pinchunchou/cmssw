@@ -1,4 +1,9 @@
-### HLT customization functions for 2023 Run-3 studies
+### customizeHLTFor2023 is obsolete since /dev/CMSSW_13_0_0/HLT/V115 (/dev/CMSSW_13_0_0/GRun/V100) as it includes [CMSHLT-2747](https://its.cern.ch/jira/browse/CMSHLT-2747) and we decided to keep the current 2022 JECs.
+### Please use the latest /dev/CMSSW_13_0_0/GRun menu
+
+_______________________________________________________________________________________
+
+### Obsolete recipes:
 
 customizeHLTFor2023_v5_fromFile includes:
 - customizeHLTFor2023_onlyHCALrechits <---- apply the new HCAL rechits to all PF and calo jet modules.
