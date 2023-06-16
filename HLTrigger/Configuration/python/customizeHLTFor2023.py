@@ -451,16 +451,49 @@ def customizeHLTFor2023_v5_fromFile(process):
 
 def _updateL1TSeedModules(process, l1tMenu):
 
-    dictL1TSeeds = {
-      # VBF Parking (exclusive seeds)
-      'hltL1DiJetVBFdoubleJet': 'L1_DoubleJet_110_35_DoubleJet35_Mass_Min620',
-      'hltL1DiJetVBFMET': 'L1_DoubleJet_110_35_DoubleJet35_Mass_Min620',
-      'hltL1DoubleJet8030MassMin500Mu3': 'L1_DoubleJet_110_35_DoubleJet35_Mass_Min620',
-      'hltL1VBFIsoEG': 'L1_DoubleJet_110_35_DoubleJet35_Mass_Min620',
-    }
+    # list of old L1T menus supported by this customisation,
+    # to be listed in chronological order
+    l1tMenuKeys = [
+      '2022_v1_4_0',
+      '2023_v1_0_0',
+      '2023_v1_1_0',
+    ]
 
-    if l1tMenu == '2022_v1_4_0':
+    try:
+        l1tMenuIndex = l1tMenuKeys.index(l1tMenu)
+    except:
+        raise RuntimeError(f'ERROR -- invalid value for argument "l1tMenu" (must be in {l1tMenuKeys}): "{l1tMenu}"')
 
+    dictL1TSeeds = {}
+
+    # customisation to be compatible with 2023_v1_1_0
+    if l1tMenuIndex <= 2:
+        dictL1TSeeds.update({
+          # VBF Parking (undo CMSHLT-2823, remove backup seeds)
+          'hltL1DiJetVBFinclLoose': 'L1_DoubleJet_90_30_DoubleJet30_Mass_Min620',
+          'hltL1DiJetVBFinclMedium': 'L1_DoubleJet_100_30_DoubleJet30_Mass_Min620',
+          'hltL1DiJetVBFincl': 'L1_DoubleJet_110_35_DoubleJet35_Mass_Min620',
+          'hltL1DiJetVBFdoubleJet': 'L1_DoubleJet_60_30_DoubleJet30_Mass_Min500_DoubleJetCentral50',
+          'hltL1DiJetVBFMET': 'L1_DoubleJet_65_30_DoubleJet30_Mass_Min400_ETMHF65',
+          'hltL1DoubleJet8030MassMin500Mu3': 'L1_DoubleJet_80_30_DoubleJet30_Mass_Min500_Mu3OQ',
+          'hltL1VBFDiJetIsoTau': 'L1_DoubleJet35_Mass_Min450_IsoTau45er2p1_RmOvlp_dR0p5',
+          'hltL1VBFLooseIsoEG': 'L1_DoubleJet40_Mass_Min450_IsoEG10er2p1_RmOvlp_dR0p2',
+          'hltL1sMu6HTT240IorDoubleJet100and35MassMin620': 'L1_Mu6_HTT240er OR L1_Mu6_HTT250er OR L1_DoubleJet_90_30_DoubleJet30_Mass_Min620 OR L1_DoubleJet_100_30_DoubleJet30_Mass_Min620 OR L1_DoubleJet_110_35_DoubleJet35_Mass_Min620 OR L1_DoubleJet_115_40_DoubleJet40_Mass_Min620 OR L1_DoubleJet_120_45_DoubleJet45_Mass_Min620',
+          'hltL1VBFDiJetOR': 'L1_DoubleJet_90_30_DoubleJet30_Mass_Min620 OR L1_DoubleJet_100_30_DoubleJet30_Mass_Min620 OR L1_DoubleJet_110_35_DoubleJet35_Mass_Min620 OR L1_DoubleJet_115_40_DoubleJet40_Mass_Min620',
+        })
+
+    # customisation to be compatible with 2023_v1_0_0
+    if l1tMenuIndex <= 1:
+        dictL1TSeeds.update({
+          # VBF Parking (exclusive seeds)
+          'hltL1DiJetVBFdoubleJet': 'L1_DoubleJet_110_35_DoubleJet35_Mass_Min620',
+          'hltL1DiJetVBFMET': 'L1_DoubleJet_110_35_DoubleJet35_Mass_Min620',
+          'hltL1DoubleJet8030MassMin500Mu3': 'L1_DoubleJet_110_35_DoubleJet35_Mass_Min620',
+          'hltL1VBFIsoEG': 'L1_DoubleJet_110_35_DoubleJet35_Mass_Min620',
+        })
+
+    # customisation to be compatible with 2022_v1_4_0
+    if l1tMenuIndex <= 0:
         dictL1TSeeds.update({
           # BPH (Tau3Mu)
           'hltL1sTripleMuControl': 'L1_TripleMu_5SQ_3SQ_0OQ',
@@ -496,9 +529,6 @@ def _updateL1TSeedModules(process, l1tMenu):
           'hltL1sDoubleTauBigORWithLowMass': 'L1_DoubleIsoTau34er2p1 OR L1_DoubleIsoTau36er2p1 OR L1_DoubleTau70er2p1 OR L1_DoubleIsoTau28er2p1_Mass_Max80 OR L1_DoubleIsoTau30er2p1_Mass_Max80',
         })
 
-    elif l1tMenu != '2023_v1_0_0':
-        raise RuntimeError(f'ERROR -- invalid value for argument "l1tMenu" (must be "2022_v1_4_0", or "2023_v1_0_0"): "{l1tMenu}"')
-
     for modName,oldSeed in dictL1TSeeds.items():
         try: getattr(process, modName).L1SeedsLogicalExpression = oldSeed
         except: pass
@@ -510,3 +540,6 @@ def customizeHLTFor2022L1TMenu(process):
 
 def customizeHLTFor2023L1TMenu_v1_0_0(process):
     return _updateL1TSeedModules(process, l1tMenu = '2023_v1_0_0')
+
+def customizeHLTFor2023L1TMenu_v1_1_0(process):
+    return _updateL1TSeedModules(process, l1tMenu = '2023_v1_1_0')

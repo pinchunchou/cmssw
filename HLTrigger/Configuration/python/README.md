@@ -14,8 +14,8 @@ All previous JEC and PF hadron calibration are wrong because of the ECAL bug in 
 To get the fixed ECAL tag in MC please use 126X_mcRun3_2023_forPU65_v4. For data, please use the usual global tag.
 
 ```
-cmsrel CMSSW_13_0_5_patch1
-cd CMSSW_13_0_5_patch1/src
+cmsrel CMSSW_13_0_7_patch1
+cd CMSSW_13_0_7_patch1/src
 cmsenv
 git cms-merge-topic silviodonato:customizeHLTFor2023
 scram b -j4
@@ -89,14 +89,18 @@ customizeJECFor2023_noAK8CaloHLT (OBSOLETE):
 ### Customization function to run the latest HLT menu on 2022 data collected with L1Menu_Collisions2022_v1_4_0
 
 The latest version of the GRun menu in ConfDB is compatible with the latest L1T menu of 2023, i.e.
-[`L1Menu_Collisions2023_v1_1_0`](https://htmlpreview.github.io/?https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/development/L1Menu_Collisions2023_v1_1_0/L1Menu_Collisions2023_v1_1_0.html).
+[`L1Menu_Collisions2023_v1_2_0`](https://htmlpreview.github.io/?https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/development/L1Menu_Collisions2023_v1_2_0/L1Menu_Collisions2023_v1_2_0.html).
 
-In order to modify the latest GRun menu to make it compatible with the first L1T menu of 2023, i.e.
-[`L1Menu_Collisions2023_v1_0_0`](https://htmlpreview.github.io/?https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/development/L1Menu_Collisions2023_v1_0_0/L1Menu_Collisions2023_v1_0_0.html),
+In order to modify the latest GRun menu to make it compatible with the previous L1T menu of 2023, i.e.
+[`L1Menu_Collisions2023_v1_1_0`](https://htmlpreview.github.io/?https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/development/L1Menu_Collisions2023_v1_1_0/L1Menu_Collisions2023_v1_1_0.html),
 the following customisation can be used
 ```
---customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023L1TMenu_v1_0_0
+--customise HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023L1TMenu_v1_1_0
 ```
+A similar argument applies to the first L1T menu of 2023, i.e.
+[`L1Menu_Collisions2023_v1_0_0`](https://htmlpreview.github.io/?https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/development/L1Menu_Collisions2023_v1_0_0/L1Menu_Collisions2023_v1_0_0.html),
+for which the customisation function is called `customizeHLTFor2023L1TMenu_v1_0_0`.
+
 Example:
 ```
 hltGetConfiguration /dev/CMSSW_13_0_0/GRun \
@@ -107,7 +111,7 @@ hltGetConfiguration /dev/CMSSW_13_0_0/GRun \
    --max-events 100 \
    --customise \
 HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023_v5_fromFile,\
-HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023L1TMenu_v1_0_0 \
+HLTrigger/Configuration/customizeHLTFor2023.customizeHLTFor2023L1TMenu_v1_1_0 \
    --eras Run3 \
    --input [input ROOT file] \
    > hltData.py
