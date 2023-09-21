@@ -33,6 +33,8 @@ private:
   edm::EDGetTokenT<trigger::TriggerFilterObjectWithRefs> firstLegLastFilterToken_;
   edm::EDGetTokenT<trigger::TriggerFilterObjectWithRefs> secondLegLastFilterToken_;
   double minMass_;
+
+  edm::InputTag l1EGTag_;
 };
 
 #endif
