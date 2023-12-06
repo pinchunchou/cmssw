@@ -24,7 +24,7 @@ HLTEgammaCombMassFilter::HLTEgammaCombMassFilter(const edm::ParameterSet& iConfi
   firstLegLastFilterTag_ = iConfig.getParameter<edm::InputTag>("firstLegLastFilter");
   secondLegLastFilterTag_ = iConfig.getParameter<edm::InputTag>("secondLegLastFilter");
   minMass_ = iConfig.getParameter<double>("minMass");
-  l1EGTag_ = iConfig.getParameter<edm::InputTag>("l1EGCand");//Pinchun
+  l1EGTag_ = iConfig.getParameter<edm::InputTag>("l1EGCand");
   firstLegLastFilterToken_ = consumes<trigger::TriggerFilterObjectWithRefs>(firstLegLastFilterTag_);
   secondLegLastFilterToken_ = consumes<trigger::TriggerFilterObjectWithRefs>(secondLegLastFilterTag_);
 }
@@ -36,7 +36,7 @@ void HLTEgammaCombMassFilter::fillDescriptions(edm::ConfigurationDescriptions& d
   makeHLTFilterDescription(desc);
   desc.add<edm::InputTag>("firstLegLastFilter", edm::InputTag("firstFilter"));
   desc.add<edm::InputTag>("secondLegLastFilter", edm::InputTag("secondFilter"));
-  desc.add<edm::InputTag>("l1EGCand", edm::InputTag("hltL1IsoRecoEcalCandidate"));//Pinchun
+  desc.add<edm::InputTag>("l1EGCand", edm::InputTag("hltL1IsoRecoEcalCandidate"));
   desc.add<double>("minMass", -1.0);
   descriptions.add("hltEgammaCombMassFilter", desc);
 }
@@ -47,7 +47,7 @@ bool HLTEgammaCombMassFilter::hltFilter(edm::Event& iEvent,
                                         trigger::TriggerFilterObjectWithRefs& filterproduct) const {
   //right, issue 1, we dont know if this is a TriggerElectron, TriggerPhoton, TriggerCluster (should never be a TriggerCluster btw as that implies the 4-vectors are not stored in AOD)
 
-  //Pinchun: Suppose it is a TriggerElectron
+  //Suppose it is a TriggerElectron
   using namespace trigger;
   if (saveTags()) {
     filterproduct.addCollectionTag(l1EGTag_);
@@ -71,18 +71,18 @@ bool HLTEgammaCombMassFilter::hltFilter(edm::Event& iEvent,
   if (!phoCandsPrev.empty()) {  //its photons
     for (auto& phoCand : phoCandsPrev) {
       //ref = phoCand;
-      filterproduct.addObject(trigger::TriggerPhoton, phoCand);//Pinchun
+      filterproduct.addObject(trigger::TriggerPhoton, phoCand);
     }
   } else if (!clusCandsPrev.empty()) {
     //try trigger cluster (should never be this, at the time of writing (17/1/11) this would indicate an error)
     for (auto& clusCand : clusCandsPrev) {
       //ref = clusCand;
-      filterproduct.addObject(trigger::TriggerCluster, clusCand);//Pinchun
+      filterproduct.addObject(trigger::TriggerCluster, clusCand);
     }
   } else if (!eleCandsPrev.empty()) {
     for (auto& eleCand : eleCandsPrev) {
       //ref = eleCand;
-      filterproduct.addObject(trigger::TriggerElectron, eleCand);//Pinchun
+      filterproduct.addObject(trigger::TriggerElectron, eleCand);
     }
   }
 
